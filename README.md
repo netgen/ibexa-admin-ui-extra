@@ -1,4 +1,4 @@
-Netgen's extra Admin UI bits for Ibexa CMS 
+Netgen's extra bits for Ibexa CMS Admin UI
 ==========================================
 
 Netgen's extra Admin UI bits for Ibexa CMS implements an enhanced administration
