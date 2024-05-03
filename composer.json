@@ -1,8 +1,8 @@
 {
-    "name": "netgen/better-ibexa-admin-ui",
-    "description": "Better Ibexa Admin UI implements an enhanced administration UI for Ibexa DXP",
+    "name": "netgen/ibexa-admin-ui-extra",
+    "description": "Netgen's extra Admin UI bits for Ibexa CMS",
     "type": "ezplatform-bundle",
-    "homepage": "https://github.com/netgen/better-ibexa-admin-ui",
+    "homepage": "https://github.com/netgen/ibexa-admin-ui-extra",
     "license": "GPL-2.0-only",
     "authors": [
         {
