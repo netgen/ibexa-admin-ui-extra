@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle\Controller\Content;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content;
 
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Core\Helper\TranslationHelper;
-use Netgen\Bundle\BetterIbexaAdminUIBundle\Form\FormFactory;
+use Netgen\Bundle\IbexaAdminUIExtraBundle\Form\FormFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ final class UpdateAlwaysAvailable extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $contentInfo = $this->contentService->loadContentInfo($id);
 
-            /** @var \Netgen\Bundle\BetterIbexaAdminUIBundle\Form\Data\Content\ContentUpdateAlwaysAvailableData $data */
+            /** @var \Netgen\Bundle\IbexaAdminUIExtraBundle\Form\Data\Content\ContentUpdateAlwaysAvailableData $data */
             $data = $form->getData();
             $alwaysAvailable = $data->getAlwaysAvailable();
 

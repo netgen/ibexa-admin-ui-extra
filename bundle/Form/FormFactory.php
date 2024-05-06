@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle\Form;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Form;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
-use Netgen\Bundle\BetterIbexaAdminUIBundle\Form\Data\Content\ContentUpdateAlwaysAvailableData;
-use Netgen\Bundle\BetterIbexaAdminUIBundle\Form\Type\Content\Translation\AlwaysAvailableUpdateType;
+use Netgen\Bundle\IbexaAdminUIExtraBundle\Form\Data\Content\ContentUpdateAlwaysAvailableData;
+use Netgen\Bundle\IbexaAdminUIExtraBundle\Form\Type\Content\Translation\AlwaysAvailableUpdateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 

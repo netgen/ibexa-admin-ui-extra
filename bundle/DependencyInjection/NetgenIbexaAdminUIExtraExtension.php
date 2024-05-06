@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle\DependencyInjection;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -17,7 +17,7 @@ use Symfony\Component\Yaml\Yaml;
 
 use function file_get_contents;
 
-final class NetgenBetterIbexaAdminUIExtension extends Extension implements PrependExtensionInterface
+final class NetgenIbexaAdminUIExtraExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

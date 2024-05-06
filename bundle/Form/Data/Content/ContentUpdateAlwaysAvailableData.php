@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle\Form\Data\Content;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Form\Data\Content;
 
 class ContentUpdateAlwaysAvailableData
 {
