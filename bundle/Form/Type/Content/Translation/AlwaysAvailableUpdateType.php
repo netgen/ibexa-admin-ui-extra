@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle\Form\Type\Content\Translation;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Form\Type\Content\Translation;
 
-use Netgen\Bundle\BetterIbexaAdminUIBundle\Form\Data\Content\ContentUpdateAlwaysAvailableData;
+use Netgen\Bundle\IbexaAdminUIExtraBundle\Form\Data\Content\ContentUpdateAlwaysAvailableData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;

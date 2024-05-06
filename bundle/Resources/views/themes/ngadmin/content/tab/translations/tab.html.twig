@@ -24,15 +24,15 @@
                 />
             </label>
             <span class="ibexa-toggle__label ibexa-toggle__label--on">
-                {{ 'toggle_widget.label.on'|trans }}
+                {{ 'content.update_always_available.toggle_widget.label.on'|trans }}
             </span>
             <span class="ibexa-toggle__label ibexa-toggle__label--off mr-2">
-                {{ 'toggle_widget.label.off'|trans }}
+                {{ 'content.update_always_available.toggle_widget.label.off'|trans }}
             </span>
         </div>
     </div>
 
-    {{ form_start(form_always_available_update, { action: path('netgen.better_ibexa_admin_ui.content.update_always_available', { id: content.id }) }) }}
+    {{ form_start(form_always_available_update, { action: path('netgen.ibexa_admin_ui_extra.content.update_always_available', { id: content.id }) }) }}
         {{ form_row(form_always_available_update.always_available, { label_attr: { hidden: true } }) }}
     {{ form_end(form_always_available_update) }}
 {% endif %}

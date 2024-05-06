@@ -1,12 +1,12 @@
 services:
-    netgen.better_ibexa_admin_ui.twig.runtime.better_ibexa_admin_ui:
-        class: Netgen\Bundle\BetterIbexaAdminUIBundle\Templating\Twig\BetterIbexaAdminUIRuntime
+    netgen.ibexa_admin_ui_extra.twig.runtime.ibexa_admin_ui_extra:
+        class: Netgen\Bundle\IbexaAdminUIExtraBundle\Templating\Twig\IbexaAdminUIExtraRuntime
         arguments:
             - "@ibexa.api.service.content"
         tags:
             - { name: twig.runtime }
 
-    netgen.better_ibexa_admin_ui.twig.extension.better_ibexa_admin_ui:
-        class: Netgen\Bundle\BetterIbexaAdminUIBundle\Templating\Twig\BetterIbexaAdminUIExtension
+    netgen.ibexa_admin_ui_extra.twig.extension.ibexa_admin_ui_extra:
+        class: Netgen\Bundle\IbexaAdminUIExtraBundle\Templating\Twig\IbexaAdminUIExtraExtension
         tags:
             - { name: twig.extension }

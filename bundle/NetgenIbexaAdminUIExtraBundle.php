@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle;
 
-use Netgen\Bundle\BetterIbexaAdminUIBundle\DependencyInjection\Compiler\SearchOverridePass;
+use Netgen\Bundle\IbexaAdminUIExtraBundle\DependencyInjection\Compiler\SearchOverridePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class NetgenBetterIbexaAdminUIBundle extends Bundle
+final class NetgenIbexaAdminUIExtraBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {

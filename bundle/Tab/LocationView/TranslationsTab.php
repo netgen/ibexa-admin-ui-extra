@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\BetterIbexaAdminUIBundle\Tab\LocationView;
+namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Tab\LocationView;
 
 use Ibexa\AdminUi\Tab\LocationView\TranslationsTab as IbexaTranslationsTab;
 use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
 use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Netgen\Bundle\BetterIbexaAdminUIBundle\Form\FormFactory;
+use Netgen\Bundle\IbexaAdminUIExtraBundle\Form\FormFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;

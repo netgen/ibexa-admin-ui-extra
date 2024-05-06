@@ -1,8 +1,8 @@
 services:
-    Netgen\Bundle\BetterIbexaAdminUIBundle\Controller\Content\UpdateAlwaysAvailable:
+    Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\UpdateAlwaysAvailable:
         parent: Ibexa\Contracts\AdminUi\Controller\Controller
         arguments:
             - '@translator'
             - '@ibexa.api.service.content'
-            - '@Netgen\Bundle\BetterIbexaAdminUIBundle\Form\FormFactory'
+            - '@Netgen\Bundle\IbexaAdminUIExtraBundle\Form\FormFactory'
             - '@Ibexa\Core\Helper\TranslationHelper'

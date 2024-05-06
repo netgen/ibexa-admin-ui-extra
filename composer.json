@@ -11,15 +11,15 @@
         }
     ],
     "require": {
-        "ibexa/admin-ui": "^4.4"
+        "ibexa/admin-ui": "^4.6"
     },
     "require-dev": {
-        "netgen/ibexa-site-api": "^5.4",
+        "netgen/ibexa-site-api": "^6.1",
         "ibexa/graphql": "^4.5"
     },
     "autoload": {
         "psr-4": {
-            "Netgen\\Bundle\\BetterIbexaAdminUIBundle\\": "bundle"
+            "Netgen\\Bundle\\IbexaAdminUIExtraBundle\\": "bundle"
         }
     },
     "extra": {
