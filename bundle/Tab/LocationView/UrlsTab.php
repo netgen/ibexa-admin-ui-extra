@@ -59,17 +59,11 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
         $contentTreeUrls = [];
         $externalUrls = [];
 
-        /** @var Location $location */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $contextParameters['location'];
 
         $locationPath = $location->path;
         foreach ($this->siteaccessList as $siteaccess) {
-            $rootLocationId = $this->configResolver->getParameter(
-                'content.tree_root.location_id',
-                null,
-                $siteaccess,
-            );
-
             $url = $this->router->generate(
                 'ibexa.url.alias',
                 [
@@ -85,6 +79,11 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
             }
 
             $locationIdIndex = array_search((string) $location->id, $locationPath, true);
+            $rootLocationId = $this->configResolver->getParameter(
+                'content.tree_root.location_id',
+                null,
+                $siteaccess,
+            );
             $rootLocationIdIndex = array_search((string) $rootLocationId, $locationPath, true);
 
             // checks if the url is inside configured siteaccess content tree
