@@ -9,3 +9,15 @@ services:
             - '@twig'
             - '@translator'
             - '@event_dispatcher'
+
+    Netgen\Bundle\IbexaAdminUIExtraBundle\Tab\LocationView\UrlsTab:
+        decorates: Ibexa\AdminUi\Tab\LocationView\UrlsTab
+        decoration_inner_name: UrlsTab.inner
+        arguments:
+            - '@UrlsTab.inner'
+            - '@router'
+            - '@ibexa.config.resolver'
+            - '%ibexa.site_access.list%'
+            - '@twig'
+            - '@translator'
+            - '@event_dispatcher'
