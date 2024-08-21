@@ -41,7 +41,7 @@ By default, the overview of External URLs is hidden. To enable the display of th
 
 ```yaml
 netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls: true
-
+```
 
 
 Licensed under [GPLv2](LICENSE)
