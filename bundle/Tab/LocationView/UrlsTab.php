@@ -27,6 +27,7 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
         private readonly RouterInterface $router,
         private readonly ConfigResolverInterface $configResolver,
         private readonly array $siteaccessList,
+        private readonly bool $showExternalSiteaccessUrls,
         Environment $twig,
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
@@ -97,6 +98,7 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
         $parameters = [
             'content_tree_urls' => $contentTreeUrls,
             'external_urls' => $externalUrls,
+            'show_external_urls' => $this->showExternalSiteaccessUrls,
         ];
 
         $parentParameters = $this->inner->getTemplateParameters($contextParameters);

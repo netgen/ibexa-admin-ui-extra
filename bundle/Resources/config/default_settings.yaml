@@ -1,0 +1,2 @@
+parameters:
+    netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls: false

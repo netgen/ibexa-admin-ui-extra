@@ -18,6 +18,7 @@ services:
             - '@router'
             - '@ibexa.config.resolver'
             - '%ibexa.site_access.list%'
+            - '%netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls%'
             - '@twig'
             - '@translator'
             - '@event_dispatcher'
