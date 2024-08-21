@@ -6,11 +6,14 @@
     siteaccess_urls: content_tree_urls,
 } only %}
 
-{% include '@ibexadesign/content/tab/url/siteaccess_urls_table.html.twig' with {
-    headline:
-    'tab.urls.siteaccess.headline.external'|trans|desc
-        ('External URLs (outside configured Siteaccess Content tree)'),
-    siteaccess_urls: external_urls,
-} only %}
+{% if show_external_urls %}
+    {% include '@ibexadesign/content/tab/url/siteaccess_urls_table.html.twig' with {
+        headline:
+        'tab.urls.siteaccess.headline.external'|trans|desc
+            ('External URLs (outside configured Siteaccess Content tree)'),
+        siteaccess_urls: external_urls,
+    } only %}
+{% endif %}
+
 
 {% include '@admin/content/tab/urls.html.twig' %}

@@ -19,6 +19,16 @@ use function file_get_contents;
 
 final class NetgenIbexaAdminUIExtraExtension extends Extension implements PrependExtensionInterface
 {
+    public function getAlias(): string
+    {
+        return 'netgen_ibexa_admin_ui_extra';
+    }
+
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
+    {
+        return new Configuration($this->getAlias());
+    }
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $locator = new FileLocator(__DIR__ . '/../Resources/config');
@@ -33,6 +43,9 @@ final class NetgenIbexaAdminUIExtraExtension extends Extension implements Prepen
         );
 
         $loader->load('services/*.yaml', 'glob');
+        $loader->load('default_settings.yaml');
+
+        $this->processExtensionConfiguration($configs, $container);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -47,5 +60,23 @@ final class NetgenIbexaAdminUIExtraExtension extends Extension implements Prepen
             $container->prependExtensionConfig($extensionName, $config);
             $container->addResource(new FileResource($configFile));
         }
+    }
+
+    private function processExtensionConfiguration(array $configs, ContainerBuilder $container): void
+    {
+        $configuration = $this->getConfiguration($configs, $container);
+        $configuration = $this->processConfiguration($configuration, $configs);
+
+        $this->processShowExternalSiteaccessUrlsConfiguration($configuration, $container);
+    }
+
+    private function processShowExternalSiteaccessUrlsConfiguration(
+        array $configuration,
+        ContainerBuilder $container,
+    ): void {
+        $container->setParameter(
+            'netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls',
+            $configuration['show_external_siteaccess_urls'],
+        );
     }
 }
