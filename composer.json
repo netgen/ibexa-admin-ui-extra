@@ -15,11 +15,18 @@
     },
     "require-dev": {
         "netgen/ibexa-site-api": "^6.1",
-        "ibexa/graphql": "^4.5"
+        "ibexa/graphql": "^4.5",
+        "phpunit/phpunit": "^10",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1"
     },
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\IbexaAdminUIExtraBundle\\": "bundle"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Netgen\\IbexaAdminUIExtra\\Tests\\": "tests/bundle"
         }
     },
     "extra": {
@@ -29,5 +36,8 @@
     },
     "config": {
         "allow-plugins": false
+    },
+    "scripts": {
+        "test": "@php vendor/bin/phpunit --colors=always"
     }
 }
