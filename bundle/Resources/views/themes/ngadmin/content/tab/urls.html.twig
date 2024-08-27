@@ -3,17 +3,16 @@
 {% include '@ibexadesign/content/tab/url/siteaccess_urls_table.html.twig' with {
     headline:'tab.urls.siteaccess.headline.siteaccess_urls'|trans|desc
         ('Siteaccess URLs'),
-    siteaccess_urls: content_tree_urls,
+    siteaccess_urls: siteaccess_urls,
 } only %}
 
-{% if show_external_urls %}
+{% if show_siteaccess_urls_outside_configured_content_tree_root %}
     {% include '@ibexadesign/content/tab/url/siteaccess_urls_table.html.twig' with {
         headline:
         'tab.urls.siteaccess.headline.siteaccess_urls.outside_configured_content_tree_root'|trans|desc
             ('Siteaccess URLs outside of the configured Content tree root'),
-        siteaccess_urls: external_urls,
+        siteaccess_urls: siteaccess_urls_outside_configured_content_tree_root,
     } only %}
 {% endif %}
-
 
 {% include '@admin/content/tab/urls.html.twig' %}

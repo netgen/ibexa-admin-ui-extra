@@ -67,16 +67,16 @@ final class NetgenIbexaAdminUIExtraExtension extends Extension implements Prepen
         $configuration = $this->getConfiguration($configs, $container);
         $configuration = $this->processConfiguration($configuration, $configs);
 
-        $this->processShowExternalSiteaccessUrlsConfiguration($configuration, $container);
+        $this->processShowSiteaccessOutsideConfiguredContentTreeRootConfiguration($configuration, $container);
     }
 
-    private function processShowExternalSiteaccessUrlsConfiguration(
+    private function processShowSiteaccessOutsideConfiguredContentTreeRootConfiguration(
         array $configuration,
         ContainerBuilder $container,
     ): void {
         $container->setParameter(
-            'netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls',
-            $configuration['show_external_siteaccess_urls'],
+            'netgen_ibexa_admin_ui_extra.show_siteaccess_urls_outside_configured_content_tree_root',
+            $configuration['show_siteaccess_urls_outside_configured_content_tree_root'],
         );
     }
 }
