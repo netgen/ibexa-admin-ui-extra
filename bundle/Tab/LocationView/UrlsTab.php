@@ -15,7 +15,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
-use function array_search;
+use function in_array;
 use function preg_match;
 
 final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
@@ -63,7 +63,6 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $contextParameters['location'];
 
-        $locationPath = $location->path;
         foreach ($this->siteaccessList as $siteaccess) {
             $url = $this->router->generate(
                 'ibexa.url.alias',
@@ -79,16 +78,7 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
                 continue;
             }
 
-            $locationIdIndex = array_search((string) $location->id, $locationPath, true);
-            $rootLocationId = $this->configResolver->getParameter(
-                'content.tree_root.location_id',
-                null,
-                $siteaccess,
-            );
-            $rootLocationIdIndex = array_search((string) $rootLocationId, $locationPath, true);
-
-            // checks if the url is inside configured siteaccess content tree
-            if ($locationIdIndex !== false && $rootLocationIdIndex !== false && $rootLocationIdIndex <= $locationIdIndex) {
+            if ($this->isUnderConfiguredContentTreeRoot($location, $siteaccess)) {
                 $siteaccessUrls[$siteaccess] = $url;
             } else {
                 $siteaccessUrlsOutsideConfiguredContentTreeRoot[$siteaccess] = $url;
@@ -104,5 +94,16 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
         $parentParameters = $this->inner->getTemplateParameters($contextParameters);
 
         return $parentParameters + $parameters;
+    }
+
+    private function isUnderConfiguredContentTreeRoot(Location $location, string $siteaccess): bool
+    {
+        $rootLocationId = $this->configResolver->getParameter(
+            'content.tree_root.location_id',
+            null,
+            $siteaccess,
+        );
+
+        return in_array((string) $rootLocationId, $location->path, true);
     }
 }
