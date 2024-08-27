@@ -36,7 +36,7 @@ final class Configuration implements ConfigurationInterface
                 ->children()
                     ->booleanNode('show_siteaccess_urls_outside_configured_content_tree_root')
                         ->defaultFalse()
-                        ->info("Show Siteaccess URLs outside of the configured Content tree root in administration's URL tab")
+                        ->info("Show Siteaccess URLs outside the configured Content tree root in administration's URL tab")
                     ->end()
                 ?->end();
     }

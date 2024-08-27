@@ -35,7 +35,7 @@ This package enhances the visibility of Content URLs by Siteaccess. URLs can be 
 The package distinguishes between two types of URLs:
 
 1. **Siteaccess URLs** that reside within the configured Siteaccess Content tree.
-2. **Siteaccess URLs** that exist outside of the configured Siteaccess Content tree.
+2. **Siteaccess URLs** that exist outside the configured Siteaccess Content tree.
 
 By default, the overview of URLs outside the configured Content tree is disabled.
 To display these URLs, you need to enable this option in your configuration:
