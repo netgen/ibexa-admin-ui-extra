@@ -24,7 +24,7 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
             ],
             [
                 [
-                    'show_external_siteaccess_urls' => false,
+                    'show_siteaccess_urls_outside_configured_content_tree_root' => false,
                 ],
             ],
         ];
@@ -35,13 +35,13 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
         return [
             [
                 [
-                    'show_external_siteaccess_urls' => false,
+                    'show_siteaccess_urls_outside_configured_content_tree_root' => false,
                 ],
                 false,
             ],
             [
                 [
-                    'show_external_siteaccess_urls' => true,
+                    'show_siteaccess_urls_outside_configured_content_tree_root' => true,
                 ],
                 true,
             ],
@@ -56,7 +56,7 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
         $this->load($configuration);
 
         $this->assertContainerBuilderHasParameter(
-            'netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls',
+            'netgen_ibexa_admin_ui_extra.show_siteaccess_urls_outside_configured_content_tree_root',
             false,
         );
     }
@@ -69,7 +69,7 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
         $this->load($configuration);
 
         $this->assertContainerBuilderHasParameter(
-            'netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls',
+            'netgen_ibexa_admin_ui_extra.show_siteaccess_urls_outside_configured_content_tree_root',
             $expectedParameterValue,
         );
     }

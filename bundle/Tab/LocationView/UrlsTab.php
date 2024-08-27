@@ -27,7 +27,7 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
         private readonly RouterInterface $router,
         private readonly ConfigResolverInterface $configResolver,
         private readonly array $siteaccessList,
-        private readonly bool $showExternalSiteaccessUrls,
+        private readonly bool $showSiteaccessUrlsOutsideConfiguredContentTreeRoot,
         Environment $twig,
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
@@ -57,8 +57,8 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
 
     public function getTemplateParameters(array $contextParameters = []): array
     {
-        $contentTreeUrls = [];
-        $externalUrls = [];
+        $siteaccessUrls = [];
+        $siteaccessUrlsOutsideConfiguredContentTreeRoot = [];
 
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $contextParameters['location'];
@@ -89,16 +89,16 @@ final class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInt
 
             // checks if the url is inside configured siteaccess content tree
             if ($locationIdIndex !== false && $rootLocationIdIndex !== false && $rootLocationIdIndex <= $locationIdIndex) {
-                $contentTreeUrls[$siteaccess] = $url;
+                $siteaccessUrls[$siteaccess] = $url;
             } else {
-                $externalUrls[$siteaccess] = $url;
+                $siteaccessUrlsOutsideConfiguredContentTreeRoot[$siteaccess] = $url;
             }
         }
 
         $parameters = [
-            'content_tree_urls' => $contentTreeUrls,
-            'external_urls' => $externalUrls,
-            'show_external_urls' => $this->showExternalSiteaccessUrls,
+            'siteaccess_urls' => $siteaccessUrls,
+            'siteaccess_urls_outside_configured_content_tree_root' => $siteaccessUrlsOutsideConfiguredContentTreeRoot,
+            'show_siteaccess_urls_outside_configured_content_tree_root' => $this->showSiteaccessUrlsOutsideConfiguredContentTreeRoot,
         ];
 
         $parentParameters = $this->inner->getTemplateParameters($contextParameters);

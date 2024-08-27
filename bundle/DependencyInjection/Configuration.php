@@ -34,8 +34,9 @@ final class Configuration implements ConfigurationInterface
             ->treatTrueLike(['enabled' => true])
             ->treatNullLike(['enabled' => false])
                 ->children()
-                    ->booleanNode('show_external_siteaccess_urls')
+                    ->booleanNode('show_siteaccess_urls_outside_configured_content_tree_root')
                         ->defaultFalse()
+                        ->info("Show Siteaccess URLs outside of the configured Content tree root in administration's URL tab")
                     ->end()
                 ?->end();
     }
