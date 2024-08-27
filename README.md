@@ -37,11 +37,12 @@ The package distinguishes between two types of URLs:
 1. **Siteaccess URLs** that reside within the configured Siteaccess Content tree.
 2. **Siteaccess URLs** that exist outside of the configured Siteaccess Content tree.
 
-By default, the overview of URLs outside of the configured Content tree is hidden.
-To enable the display of these URLs, set the following parameter in your configuration:
+By default, the overview of URLs outside the configured Content tree is disabled.
+To display these URLs, you need to enable this option in your configuration:
 
 ```yaml
-netgen_ibexa_admin_ui_extra.show_external_siteaccess_urls: true
+netgen_ibexa_admin_ui_extra:
+    show_siteaccess_urls_outside_configured_content_tree_root: true
 ```
 
 
