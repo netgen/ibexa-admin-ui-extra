@@ -1,16 +1,16 @@
 {% trans_default_domain 'ibexa_content_url' %}
 
 {% include '@ibexadesign/content/tab/url/siteaccess_urls_table.html.twig' with {
-    headline:'tab.urls.siteaccess.headline.content_tree'|trans|desc
-        ('Content tree URLs (inside configured Siteaccess Content tree)'),
+    headline:'tab.urls.siteaccess.headline.siteaccess_urls'|trans|desc
+        ('Siteaccess URLs'),
     siteaccess_urls: content_tree_urls,
 } only %}
 
 {% if show_external_urls %}
     {% include '@ibexadesign/content/tab/url/siteaccess_urls_table.html.twig' with {
         headline:
-        'tab.urls.siteaccess.headline.external'|trans|desc
-            ('External URLs (outside configured Siteaccess Content tree)'),
+        'tab.urls.siteaccess.headline.siteaccess_urls.outside_configured_content_tree_root'|trans|desc
+            ('Siteaccess URLs outside of the configured Content tree root'),
         siteaccess_urls: external_urls,
     } only %}
 {% endif %}
