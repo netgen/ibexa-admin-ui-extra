@@ -68,6 +68,7 @@ final class NetgenIbexaAdminUIExtraExtension extends Extension implements Prepen
         $configuration = $this->processConfiguration($configuration, $configs);
 
         $this->processShowSiteaccessOutsideConfiguredContentTreeRootConfiguration($configuration, $container);
+        $this->processQueuesConfiguration($configuration, $container);
     }
 
     private function processShowSiteaccessOutsideConfiguredContentTreeRootConfiguration(
@@ -77,6 +78,19 @@ final class NetgenIbexaAdminUIExtraExtension extends Extension implements Prepen
         $container->setParameter(
             'netgen_ibexa_admin_ui_extra.show_siteaccess_urls_outside_configured_content_tree_root',
             $configuration['show_siteaccess_urls_outside_configured_content_tree_root'],
+        );
+    }
+
+    private function processQueuesConfiguration(array $configuration, ContainerBuilder $container): void
+    {
+        $container->setParameter(
+            'netgen_ibexa_admin_ui_extra.queues.disabled',
+            $configuration['queues']['disabled'],
+        );
+
+        $container->setParameter(
+            'netgen_ibexa_admin_ui_extra.queues.transports',
+            $configuration['queues']['transports'],
         );
     }
 }

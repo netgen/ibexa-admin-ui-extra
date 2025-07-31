@@ -23,6 +23,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
 
         $this->addShowExternalSiteaccessUrls($rootNode);
+        $this->addQueuesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -39,5 +40,28 @@ final class Configuration implements ConfigurationInterface
                         ->info("Show Siteaccess URLs outside the configured Content tree root in administration's URL tab")
                     ->end()
                 ?->end();
+    }
+
+    private function addQueuesSection(ArrayNodeDefinition $nodeDefinition): void
+    {
+        $nodeDefinition
+            ->children()
+                ->arrayNode('queues')
+                    ->info('Configure Queues module in administration')
+                    ->addDefaultsIfNotSet()
+                    ->treatFalseLike(['enabled' => false])
+                    ->treatTrueLike(['enabled' => true])
+                    ->treatNullLike(['enabled' => false])
+                    ->children()
+                        ->booleanNode('disabled')
+                            ->defaultFalse()
+                            ->info('Disable the Queues module')
+                        ->end()
+                        ?->arrayNode('transports')
+                            ->scalarPrototype()
+                            ->info('Limit the transports that are displayed in the Queues module.')
+                        ->end()
+                    ?->end()
+            ->end();
     }
 }
