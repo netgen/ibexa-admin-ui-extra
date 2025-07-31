@@ -6,3 +6,11 @@ services:
             - '@ibexa.api.service.content'
             - '@Netgen\Bundle\IbexaAdminUIExtraBundle\Form\FormFactory'
             - '@Ibexa\Core\Helper\TranslationHelper'
+
+    Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Queues:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        arguments:
+            $transportLocator: '@messenger.receiver_locator'
+            $queuesDisabled: '%netgen_ibexa_admin_ui_extra.queues.disabled%'
+            $allowedTransports: '%netgen_ibexa_admin_ui_extra.queues.transports%'
+            $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
