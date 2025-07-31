@@ -25,6 +25,10 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
             [
                 [
                     'show_siteaccess_urls_outside_configured_content_tree_root' => false,
+                    'queues' => [
+                        'disabled' => false,
+                        'transports' => [],
+                    ],
                 ],
             ],
         ];
@@ -44,6 +48,51 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
                     'show_siteaccess_urls_outside_configured_content_tree_root' => true,
                 ],
                 true,
+            ],
+        ];
+    }
+
+    public static function provideQueuesConfigurationCases(): iterable
+    {
+        return [
+            [
+                [
+                    'queues' => [],
+                ],
+                [
+                    'disabled' => false,
+                    'transports' => [],
+                ],
+            ],
+            [
+                [
+                    'queues' => [
+                        'disabled' => false,
+                        'transports' => [],
+                    ],
+                ],
+                [
+                    'disabled' => false,
+                    'transports' => [],
+                ],
+            ],
+            [
+                [
+                    'queues' => [
+                        'disabled' => true,
+                        'transports' => [
+                            'transport1',
+                            'transport2',
+                        ],
+                    ],
+                ],
+                [
+                    'disabled' => true,
+                    'transports' => [
+                        'transport1',
+                        'transport2',
+                    ],
+                ],
             ],
         ];
     }
@@ -71,6 +120,23 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter(
             'netgen_ibexa_admin_ui_extra.show_siteaccess_urls_outside_configured_content_tree_root',
             $expectedParameterValue,
+        );
+    }
+
+    /**
+     * @dataProvider provideQueuesConfigurationCases
+     */
+    public function testQueuesConfiguration(array $configuration, array $expectedParameterValues): void
+    {
+        $this->load($configuration);
+
+        $this->assertContainerBuilderHasParameter(
+            'netgen_ibexa_admin_ui_extra.queues.disabled',
+            $expectedParameterValues['disabled'],
+        );
+        $this->assertContainerBuilderHasParameter(
+            'netgen_ibexa_admin_ui_extra.queues.transports',
+            $expectedParameterValues['transports'],
         );
     }
 
