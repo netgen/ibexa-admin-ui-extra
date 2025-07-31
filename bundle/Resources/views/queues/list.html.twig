@@ -5,13 +5,13 @@
 {% block breadcrumbs %}
     {% include '@ibexadesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
-        { value: 'queues.title'|trans|desc('Queues1') },
+        { value: 'queues.title'|trans|desc('Queues') },
     ]} %}
 {% endblock %}
 
 {% block header %}
     {% include '@ibexadesign/ui/page_title.html.twig' with {
-        title: 'queues.title'|trans|desc('Queues2'),
+        title: 'queues.title'|trans|desc('Queues'),
     } %}
 {% endblock %}
 
@@ -33,8 +33,8 @@
             headline: headline_text,
             head_cols: [
                 { has_checkbox: false },
-                { content: 'queues.column.name'|trans|desc('Queue name1') },
-                { content: 'queues.column.count'|trans|desc('Message count1') },
+                { content: 'queues.column.name'|trans|desc('Queue name') },
+                { content: 'queues.column.count'|trans|desc('Message count') },
                 {},
             ],
             body_rows,
