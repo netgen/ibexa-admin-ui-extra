@@ -37,7 +37,7 @@ final class Queues extends Controller
 
         $transportNames = !empty($this->allowedTransports)
             ? $this->allowedTransports
-            : array_keys($this->transportLocator->getProvidedServices());
+            : $this->getAllTransportAliases();
 
         $queueData = [];
 
@@ -67,5 +67,16 @@ final class Queues extends Controller
                 'queue_data' => $queueData,
             ],
         );
+    }
+
+    private function getAllTransportAliases(): iterable
+    {
+        $names = array_keys($this->transportLocator->getProvidedServices());
+
+        foreach ($names as $name) {
+            if (!str_starts_with($name, 'messenger.transport.')) {
+                yield $name;
+            }
+        }
     }
 }
