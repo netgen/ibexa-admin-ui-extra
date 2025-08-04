@@ -11,6 +11,6 @@ services:
         parent: Ibexa\Contracts\AdminUi\Controller\Controller
         arguments:
             $transportLocator: '@messenger.receiver_locator'
-            $queuesDisabled: '%netgen_ibexa_admin_ui_extra.queues.disabled%'
+            $queuesEnabled: '%netgen_ibexa_admin_ui_extra.queues.enabled%'
             $allowedTransports: '%netgen_ibexa_admin_ui_extra.queues.transports%'
             $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
