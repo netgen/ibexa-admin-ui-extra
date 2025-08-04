@@ -31,15 +31,12 @@ final class Configuration implements ConfigurationInterface
     private function addShowExternalSiteaccessUrls(ArrayNodeDefinition $nodeDefinition): void
     {
         $nodeDefinition
-            ->treatFalseLike(['enabled' => false])
-            ->treatTrueLike(['enabled' => true])
-            ->treatNullLike(['enabled' => false])
-                ->children()
-                    ->booleanNode('show_siteaccess_urls_outside_configured_content_tree_root')
-                        ->defaultFalse()
-                        ->info("Show Siteaccess URLs outside the configured Content tree root in administration's URL tab")
-                    ->end()
-                ?->end();
+            ->children()
+                ->booleanNode('show_siteaccess_urls_outside_configured_content_tree_root')
+                    ->defaultFalse()
+                    ->info("Show Siteaccess URLs outside the configured Content tree root in administration's URL tab")
+                ->end()
+            ?->end();
     }
 
     private function addQueuesSection(ArrayNodeDefinition $nodeDefinition): void
