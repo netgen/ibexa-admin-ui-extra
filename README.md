@@ -70,7 +70,7 @@ You can customize the queues feature in your configuration:
 ```yaml
 netgen_ibexa_admin_ui_extra:
     queues:
-        disabled: false
+        enabled: true
         transports:
             - transport1
             - transport2
