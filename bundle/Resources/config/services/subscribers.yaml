@@ -2,6 +2,6 @@ services:
     Netgen\Bundle\IbexaAdminUIExtraBundle\Menu\MenuListener:
         arguments:
             $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
-            $queuesDisabled: '%netgen_ibexa_admin_ui_extra.queues.disabled%'
+            $queuesEnabled: '%netgen_ibexa_admin_ui_extra.queues.enabled%'
         tags:
             - { name: kernel.event_subscriber }

@@ -14,8 +14,8 @@ final class DisableQueuesPass implements CompilerPassInterface
     {
         if (!InstalledVersions::isInstalled('symfony/messenger')) {
             $container->setParameter(
-                'netgen_ibexa_admin_ui_extra.queues.disabled',
-                true,
+                'netgen_ibexa_admin_ui_extra.queues.enabled',
+                false,
             );
         }
     }

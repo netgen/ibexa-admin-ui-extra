@@ -13,7 +13,7 @@ final class MenuListener implements EventSubscriberInterface
 {
     public function __construct(
         private readonly PermissionResolver $permissionResolver,
-        private readonly bool $queuesDisabled,
+        private readonly bool $queuesEnabled,
     ) {}
 
     public static function getSubscribedEvents(): array
@@ -25,7 +25,7 @@ final class MenuListener implements EventSubscriberInterface
 
     public function onMenuConfigure(ConfigureMenuEvent $event): void
     {
-        if ($this->queuesDisabled) {
+        if (!$this->queuesEnabled) {
             return;
         }
 

@@ -20,14 +20,14 @@ final class Queues extends Controller
 {
     public function __construct(
         public readonly ServiceLocator $transportLocator,
-        private readonly bool $queuesDisabled,
+        private readonly bool $queuesEnabled,
         private readonly array $allowedTransports,
         private readonly PermissionResolver $permissionResolver,
     ) {}
 
     public function __invoke(): Response
     {
-        if ($this->queuesDisabled) {
+        if (!$this->queuesEnabled) {
             throw new NotFoundHttpException('Queues feature is disabled.');
         }
 

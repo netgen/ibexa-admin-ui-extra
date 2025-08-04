@@ -26,7 +26,7 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
                 [
                     'show_siteaccess_urls_outside_configured_content_tree_root' => false,
                     'queues' => [
-                        'disabled' => false,
+                        'enabled' => true,
                         'transports' => [],
                     ],
                 ],
@@ -60,26 +60,26 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
                     'queues' => [],
                 ],
                 [
-                    'disabled' => false,
+                    'enabled' => true,
                     'transports' => [],
                 ],
             ],
             [
                 [
                     'queues' => [
-                        'disabled' => false,
+                        'enabled' => true,
                         'transports' => [],
                     ],
                 ],
                 [
-                    'disabled' => false,
+                    'enabled' => true,
                     'transports' => [],
                 ],
             ],
             [
                 [
                     'queues' => [
-                        'disabled' => true,
+                        'enabled' => false,
                         'transports' => [
                             'transport1',
                             'transport2',
@@ -87,7 +87,7 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
                     ],
                 ],
                 [
-                    'disabled' => true,
+                    'enabled' => false,
                     'transports' => [
                         'transport1',
                         'transport2',
@@ -131,8 +131,8 @@ final class NetgenIbexaAdminUIExtraTest extends AbstractExtensionTestCase
         $this->load($configuration);
 
         $this->assertContainerBuilderHasParameter(
-            'netgen_ibexa_admin_ui_extra.queues.disabled',
-            $expectedParameterValues['disabled'],
+            'netgen_ibexa_admin_ui_extra.queues.enabled',
+            $expectedParameterValues['enabled'],
         );
         $this->assertContainerBuilderHasParameter(
             'netgen_ibexa_admin_ui_extra.queues.transports',

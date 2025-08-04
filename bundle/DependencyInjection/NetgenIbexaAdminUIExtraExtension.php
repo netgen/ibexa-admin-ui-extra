@@ -84,8 +84,8 @@ final class NetgenIbexaAdminUIExtraExtension extends Extension implements Prepen
     private function processQueuesConfiguration(array $configuration, ContainerBuilder $container): void
     {
         $container->setParameter(
-            'netgen_ibexa_admin_ui_extra.queues.disabled',
-            $configuration['queues']['disabled'],
+            'netgen_ibexa_admin_ui_extra.queues.enabled',
+            $configuration['queues']['enabled'],
         );
 
         $container->setParameter(
