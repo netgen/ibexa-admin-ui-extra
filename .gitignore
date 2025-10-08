@@ -6,3 +6,4 @@ composer.lock
 build
 studio.json
 .phpunit.cache
+.idea/
