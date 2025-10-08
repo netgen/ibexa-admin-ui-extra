@@ -11,13 +11,12 @@
         }
     ],
     "require": {
-        "ibexa/admin-ui": "^4.6"
+        "ibexa/admin-ui": "^5.0.2"
     },
     "require-dev": {
-        "netgen/ibexa-site-api": "^6.1",
-        "ibexa/graphql": "^4.5",
+        "ibexa/graphql": "^5.0.2",
         "phpunit/phpunit": "^10",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1"
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0.0"
     },
     "autoload": {
         "psr-4": {
