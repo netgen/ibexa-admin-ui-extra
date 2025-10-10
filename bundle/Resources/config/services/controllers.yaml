@@ -7,6 +7,11 @@ services:
             - '@Netgen\Bundle\IbexaAdminUIExtraBundle\Form\FormFactory'
             - '@Ibexa\Core\Helper\TranslationHelper'
 
+    Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\VisibilityInfo:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        arguments:
+            - '@ibexa.api.service.location'
+
     Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\LastModifiedInfo:
         parent: Ibexa\Contracts\AdminUi\Controller\Controller
 

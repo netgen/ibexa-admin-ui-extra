@@ -1,0 +1,10 @@
+<div>
+    {% embed '@IbexaAdminUi/themes/admin/ui/component/alert/alert.html.twig' with {
+        type: type,
+    } %}
+        {% block icon %}{% endblock %}
+        {% block title %}
+            <div class="ibexa-alert__title">{{ info }}</div>
+        {% endblock %}
+    {% endembed %}
+</div>
