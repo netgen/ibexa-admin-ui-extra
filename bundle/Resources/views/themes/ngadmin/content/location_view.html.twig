@@ -46,10 +46,14 @@
         {% endblock %}
     {% endembed %}
 
-    {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\VisibilityInfo', {
-        'content': content,
-        'iconPath': ibexa_icon_path('hide'),
-    })) }}
+    <div id="ng-visibility-alert"
+         data-url="{{ path('netgen.ibexa_admin_ui_extra.content.visibility.locations', { contentId: content.id, iconPath: ibexa_icon_path('hide') }) }}"
+    >
+        {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\VisibilityInfo', {
+            'contentId': content.id,
+            'iconPath': ibexa_icon_path('hide'),
+        })) }}
+    </div>
 
     {{ ibexa_render_component_group(
         'location-view-content-alerts',
