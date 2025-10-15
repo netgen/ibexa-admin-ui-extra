@@ -26,63 +26,80 @@ class VisibilityInfo extends Controller
 
         $content = $this->contentService->loadContent($contentId);
 
+        $extraContent = '';
         if ($content->getContentInfo()->isHidden() === true) {
-            $title = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
+            $extraContent = $this->translator->trans('content.visibility.content_hidden', [], 'locationview') . '<br>';
         }
 
         try {
             $locations = $this->locationService->loadLocations($content->getContentInfo());
 
-            $hiddenLocations = 0;
-            $hiddenByAncestor = false;
+            $explicitlyHiddenLocations = 0;
+            $hiddenByAncestorLocations = 0;
             foreach ($locations as $location) {
                 if ($location->explicitlyHidden) {
-                    $hiddenLocations++;
-                    continue;
+                    $explicitlyHiddenLocations++;
                 }
 
                 if ($location->isInvisible() && $location->getParentLocation()?->isInvisible()) {
-                    $hiddenLocations++;
-                    $hiddenByAncestor = true;
+                    $hiddenByAncestorLocations++;
                 }
             }
 
-            if ($hiddenLocations !== 0) {
-                if (count($locations) === 1) {
-                    $extraContent = $this->translator->trans('content.visibility.location_hidden', [], 'locationview');
-                } else {
-                    $extraContent = $hiddenByAncestor
-                        ? $this->translator->trans(
-                            'content.visibility.locations_hidden_by_ancestor',
-                            [
-                                '%hidden%' => $hiddenLocations,
-                                '%total%' => count($locations),
-                            ],
-                            'locationview',
-                        )
-                        : $this->translator->trans(
-                            'content.visibility.locations_hidden',
-                            [
-                                '%hidden%' => $hiddenLocations,
-                                '%total%' => count($locations),
-                            ],
-                            'locationview',
-                        );
+            $explicitlyHiddenLocationsMessage = '';
+            $hiddenByAncestorLocationsMessage = '';
+            if (count($locations) === 1) {
+                if ($explicitlyHiddenLocations !== 0) {
+                    $explicitlyHiddenLocationsMessage = $this->translator->trans('content.visibility.location_hidden', [], 'locationview');
                 }
+
+                if ($hiddenByAncestorLocations !== 0) {
+                    $hiddenByAncestorLocationsMessage = $this->translator->trans('content.visibility.location_hidden_by_ancestor', [], 'locationview');
+                }
+            } else {
+                if ($explicitlyHiddenLocations !== 0) {
+                    $explicitlyHiddenLocationsMessage = $this->translator->trans(
+                        'content.visibility.locations_hidden',
+                        [
+                            '%hidden%' => $explicitlyHiddenLocations,
+                            '%total%' => count($locations),
+                        ],
+                        'locationview',
+                    );
+                }
+
+                if ($hiddenByAncestorLocations !== 0) {
+                    $hiddenByAncestorLocationsMessage = $this->translator->trans(
+                        'content.visibility.locations_hidden_by_ancestor',
+                        [
+                            '%hidden%' => $hiddenByAncestorLocations,
+                            '%total%' => count($locations),
+                        ],
+                        'locationview',
+                    );
+                }
+            }
+
+            if ($explicitlyHiddenLocationsMessage !== '') {
+                $extraContent .= $explicitlyHiddenLocationsMessage . '<br>';
+            }
+
+            if ($hiddenByAncestorLocationsMessage !== '') {
+                $extraContent .= $hiddenByAncestorLocationsMessage . '<br>';
             }
         } catch (BadStateException $e) {
-            $extraContent = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
+            $extraContent .= $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview') . '<br>';
         }
 
-        if (!isset($title) && !isset($extraContent)) {
+        if ($extraContent === '') {
             return new Response('', Response::HTTP_NO_CONTENT);
         }
 
         return $this->render('@IbexaAdminUi/themes/admin/ui/component/alert/alert.html.twig',
             [
                 'type' => 'info',
-                'title' => $title ?? '',
-                'extra_content' => $extraContent ?? '',
+                'title' => $this->translator->trans('content.visibility.info', [], 'locationview'),
+                'extra_content' => $extraContent,
                 'icon_path' => $iconPath,
                 'class' => 'mt-4',
             ],
