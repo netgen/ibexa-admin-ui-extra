@@ -9,18 +9,20 @@ use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class VisibilityInfo extends Controller
 {
     public function __construct(
         private readonly LocationService $locationService,
+        private readonly TranslatorInterface $translator,
     ) {}
 
-    public function __invoke(Content $content): Response
+    public function __invoke(Content $content, String $iconPath): Response
     {
-        $info = 'Content is HIDDEN';
-        $messageType = 'error';
-        if ($content->getContentInfo()->isHidden() === false) {
+        if ($content->getContentInfo()->isHidden() === true) {
+            $title = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
+        } else {
             try {
                 $locations = $this->locationService->loadLocations($content->getContentInfo());
 
@@ -31,37 +33,35 @@ class VisibilityInfo extends Controller
                     }
                 }
 
-                if (count($locations) === 1) {
-                    if ($hiddenLocations === 0) {
-                        $info = 'Location: VISIBLE';
-                        $messageType = 'success';
+                if ($hiddenLocations !== 0) {
+                    if (count($locations) === 1) {
+                        $title = $this->translator->trans('content.visibility.location_hidden', [], 'locationview');
                     } else {
-                        $info = 'Location: HIDDEN';
-                    }
-                } else if ($hiddenLocations === 0) {
-                    $info = 'Locations: ALL VISIBLE';
-                    $messageType = 'success';
-                } else {
-                    // some or all locations are hidden
-                    $info = sprintf(
-                        'Locations: %s out of %s HIDDEN',
-                        $hiddenLocations,
-                        count($locations),
-                    );
-                    if (count($locations) !== $hiddenLocations) {
-                        $messageType = 'warning';
+                        $title = $this->translator->trans(
+                            'content.visibility.locations_hidden',
+                            [
+                                '%hidden%' => $hiddenLocations,
+                                '%total%' => count($locations),
+                            ],
+                            'locationview',
+                        );
                     }
                 }
             } catch (BadStateException $e) {
-                $info = "Can't fetch locations for this content!";
+                $title = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
             }
         }
 
-        return $this->render(
-            '@NetgenIbexaAdminUIExtra/themes/ngadmin/ui/visibility_info.html.twig',
+        if (!isset($title)) {
+            return new Response('', Response::HTTP_NO_CONTENT);
+        }
+
+        return $this->render('@IbexaAdminUi/themes/admin/ui/component/alert/alert.html.twig',
             [
-                'info' => $info,
-                'type' => $messageType,
+                'type' => 'info',
+                'title' => $title,
+                'icon_path' => $iconPath,
+                'class' => 'mt-4',
             ],
         );
     }

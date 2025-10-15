@@ -11,6 +11,7 @@ services:
         parent: Ibexa\Contracts\AdminUi\Controller\Controller
         arguments:
             - '@ibexa.api.service.location'
+            - '@Symfony\Contracts\Translation\TranslatorInterface'
 
     Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\LastModifiedInfo:
         parent: Ibexa\Contracts\AdminUi\Controller\Controller

@@ -3,3 +3,10 @@ content.update_always_available.success.available: "Content '%name%' marked as a
 content.update_always_available.success.not_available: "Content '%name%' unmarked as always available."
 content.update_always_available.toggle_widget.label.on: "On"
 content.update_always_available.toggle_widget.label.off: "Off"
+
+content.last_modified: "Last modified"
+
+content.visibility.content_hidden: "Content is hidden"
+content.visibility.location_hidden: "Location is hidden"
+content.visibility.locations_hidden: "Locations: %hidden% out of %total% hidden"
+content.visibility.cannot_fetch_locations: "Can't fetch locations for this content!"
