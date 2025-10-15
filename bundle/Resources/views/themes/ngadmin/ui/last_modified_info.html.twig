@@ -1,8 +1,8 @@
-{% trans_default_domain 'ibexa_locationview' %}
+{% trans_default_domain 'locationview' %}
 
 <div class="ibexa-details__items">
     <div class="ibexa-details__item">
-        <div class="ibexa-details__item-label ibexa-label">{{ 'tab.author.modified'|trans|desc('Modified') }}</div>
+        <div class="ibexa-details__item-label ibexa-label">{{ 'content.last_modified'|trans|desc('Last modified') }}</div>
         <div class="ibexa-details__item-content-wrapper">
             <div class="ibexa-details__item-content ibexa-details__item-content--ellipsized" style="font-size: .875rem;">
                 {{ last_contributor_name }} at {{ content_info.modificationDate | date('d/m/Y H:i') }}
