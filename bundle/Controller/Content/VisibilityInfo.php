@@ -28,22 +28,39 @@ class VisibilityInfo extends Controller
 
         if ($content->getContentInfo()->isHidden() === true) {
             $title = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
-        } else {
-            try {
-                $locations = $this->locationService->loadLocations($content->getContentInfo());
+        }
 
-                $hiddenLocations = 0;
-                foreach ($locations as $location) {
-                    if ($location->explicitlyHidden || $location->invisible) {
-                        $hiddenLocations++;
-                    }
+        try {
+            $locations = $this->locationService->loadLocations($content->getContentInfo());
+
+            $hiddenLocations = 0;
+            $hiddenByAncestor = false;
+            foreach ($locations as $location) {
+                if ($location->explicitlyHidden) {
+                    $hiddenLocations++;
+                    continue;
                 }
 
-                if ($hiddenLocations !== 0) {
-                    if (count($locations) === 1) {
-                        $title = $this->translator->trans('content.visibility.location_hidden', [], 'locationview');
-                    } else {
-                        $title = $this->translator->trans(
+                if ($location->isInvisible() && $location->getParentLocation()?->isInvisible()) {
+                    $hiddenLocations++;
+                    $hiddenByAncestor = true;
+                }
+            }
+
+            if ($hiddenLocations !== 0) {
+                if (count($locations) === 1) {
+                    $extraContent = $this->translator->trans('content.visibility.location_hidden', [], 'locationview');
+                } else {
+                    $extraContent = $hiddenByAncestor
+                        ? $this->translator->trans(
+                            'content.visibility.locations_hidden_by_ancestor',
+                            [
+                                '%hidden%' => $hiddenLocations,
+                                '%total%' => count($locations),
+                            ],
+                            'locationview',
+                        )
+                        : $this->translator->trans(
                             'content.visibility.locations_hidden',
                             [
                                 '%hidden%' => $hiddenLocations,
@@ -51,21 +68,21 @@ class VisibilityInfo extends Controller
                             ],
                             'locationview',
                         );
-                    }
                 }
-            } catch (BadStateException $e) {
-                $title = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
             }
+        } catch (BadStateException $e) {
+            $extraContent = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
         }
 
-        if (!isset($title)) {
+        if (!isset($title) && !isset($extraContent)) {
             return new Response('', Response::HTTP_NO_CONTENT);
         }
 
         return $this->render('@IbexaAdminUi/themes/admin/ui/component/alert/alert.html.twig',
             [
                 'type' => 'info',
-                'title' => $title,
+                'title' => $title ?? '',
+                'extra_content' => $extraContent ?? '',
                 'icon_path' => $iconPath,
                 'class' => 'mt-4',
             ],

@@ -8,5 +8,6 @@ content.last_modified: "Last modified"
 
 content.visibility.content_hidden: "Content is hidden"
 content.visibility.location_hidden: "Location is hidden"
-content.visibility.locations_hidden: "Locations: %hidden% out of %total% hidden"
+content.visibility.locations_hidden: "%hidden% of %total% location(s) are hidden"
+content.visibility.locations_hidden_by_ancestor: "%hidden% of %total% location(s) are hidden by parent or ancestor location"
 content.visibility.cannot_fetch_locations: "Can't fetch locations for this content!"
