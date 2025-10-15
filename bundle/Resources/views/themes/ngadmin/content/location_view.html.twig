@@ -37,22 +37,19 @@
                     {% endfor %}
                     {{ language_names|join(', ') }}
                 </div>
-                <div style="flex-basis: 50%;">
-                    <div style="display: flex; flex-direction: column; align-items: flex-end; align-self: start;">
-                        <div class="p-1">
-                            {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\LastModifiedInfo', {
-                                'content': content,
-                            })) }}
-
-                            {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\VisibilityInfo', {
-                                'content': content,
-                            })) }}
-                        </div>
-                    </div>
+                <div style="flex-basis: 50%; display: flex; justify-content: flex-end">
+                    {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\LastModifiedInfo', {
+                        'content': content,
+                    })) }}
                 </div>
             </div>
         {% endblock %}
     {% endembed %}
+
+    {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\VisibilityInfo', {
+        'content': content,
+        'iconPath': ibexa_icon_path('hide'),
+    })) }}
 
     {{ ibexa_render_component_group(
         'location-view-content-alerts',
