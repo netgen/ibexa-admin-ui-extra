@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content;
 
 use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -16,10 +17,15 @@ class VisibilityInfo extends Controller
     public function __construct(
         private readonly LocationService $locationService,
         private readonly TranslatorInterface $translator,
+        private readonly ContentService $contentService,
     ) {}
 
-    public function __invoke(Content $content, String $iconPath): Response
+    public function __invoke(int $contentId, Request $request): Response
     {
+        $iconPath = $request->attributes->get('iconPath') ?? $request->query->get('iconPath');
+
+        $content = $this->contentService->loadContent($contentId);
+
         if ($content->getContentInfo()->isHidden() === true) {
             $title = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
         } else {
