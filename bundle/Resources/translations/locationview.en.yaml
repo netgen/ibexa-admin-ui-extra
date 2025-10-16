@@ -13,3 +13,5 @@ content.visibility.location_hidden_by_ancestor: "Location is hidden by parent or
 content.visibility.locations_hidden: "%hidden% of %total% location(s) are hidden"
 content.visibility.locations_hidden_by_ancestor: "%hidden% of %total% location(s) are hidden by parent or ancestor location"
 content.visibility.cannot_fetch_locations: "Can't fetch locations for this content!"
+
+content.tab.locations.visibility_toggle: "One of the ancestors is hidden"
