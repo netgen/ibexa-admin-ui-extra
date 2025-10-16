@@ -4,7 +4,7 @@ content.update_always_available.success.not_available: "Content '%name%' unmarke
 content.update_always_available.toggle_widget.label.on: "On"
 content.update_always_available.toggle_widget.label.off: "Off"
 
-content.last_modified: "Last modified"
+content.last_modified: "Last modified:"
 
 content.visibility.info: "This content might not be visible"
 content.visibility.content_hidden: "Content is hidden"
