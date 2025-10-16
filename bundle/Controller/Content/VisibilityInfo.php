@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+use function implode;
+
 class VisibilityInfo extends Controller
 {
     public function __construct(
@@ -26,9 +28,9 @@ class VisibilityInfo extends Controller
 
         $content = $this->contentService->loadContent($contentId);
 
-        $extraContent = '';
+        $extraContent = [];
         if ($content->getContentInfo()->isHidden() === true) {
-            $extraContent = $this->translator->trans('content.visibility.content_hidden', [], 'locationview') . '<br>';
+            $extraContent[] = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
         }
 
         try {
@@ -81,17 +83,17 @@ class VisibilityInfo extends Controller
             }
 
             if ($explicitlyHiddenLocationsMessage !== '') {
-                $extraContent .= $explicitlyHiddenLocationsMessage . '<br>';
+                $extraContent[] = $explicitlyHiddenLocationsMessage;
             }
 
             if ($hiddenByAncestorLocationsMessage !== '') {
-                $extraContent .= $hiddenByAncestorLocationsMessage . '<br>';
+                $extraContent[] = $hiddenByAncestorLocationsMessage;
             }
         } catch (BadStateException $e) {
-            $extraContent .= $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview') . '<br>';
+            $extraContent[] = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
         }
 
-        if ($extraContent === '') {
+        if ($extraContent === []) {
             return new Response('', Response::HTTP_NO_CONTENT);
         }
 
@@ -99,7 +101,7 @@ class VisibilityInfo extends Controller
             [
                 'type' => 'info',
                 'title' => $this->translator->trans('content.visibility.info', [], 'locationview'),
-                'extra_content' => $extraContent,
+                'extra_content' => implode('<br>', $extraContent),
                 'icon_path' => $iconPath,
                 'class' => 'mt-4',
             ],
