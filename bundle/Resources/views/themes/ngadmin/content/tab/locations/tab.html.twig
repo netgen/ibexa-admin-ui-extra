@@ -71,6 +71,9 @@
                     {% set isParentLocationInvisible = location.parentLocation is defined and location.parentLocation.invisible %}
                     <label class="ibexa-content-locations__visibility-toggler-label {{ (location.explicitlyHidden or not isParentLocationInvisible) ? 'ibexa-content-locations__visibility-toggler-label--hidden' }}">
                         {% if isParentLocationInvisible %}
+                            <svg class="ibexa-icon ibexa-icon--small-medium">
+                                <use xlink:href="{{ ibexa_icon_path('system-information') }}"></use>
+                            </svg>
                             {{ 'content.tab.locations.visibility_toggle'|trans({}, 'locationview')|desc('One of the ancestors is hidden') }}
                         {% endif %}
                     </label>
