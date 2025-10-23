@@ -13,6 +13,7 @@ services:
             - '@ibexa.api.service.location'
             - '@Symfony\Contracts\Translation\TranslatorInterface'
             - '@ibexa.api.service.content'
+            - '@Ibexa\AdminUi\Resolver\IconPathResolver'
 
     Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\LastModifiedInfo:
         parent: Ibexa\Contracts\AdminUi\Controller\Controller

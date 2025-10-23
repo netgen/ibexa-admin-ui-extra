@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content;
 
 use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Resolver\IconPathResolverInterface;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -20,11 +21,12 @@ class VisibilityInfo extends Controller
         private readonly LocationService $locationService,
         private readonly TranslatorInterface $translator,
         private readonly ContentService $contentService,
+        private readonly IconPathResolverInterface $iconPathResolver,
     ) {}
 
     public function __invoke(int $contentId, Request $request): Response
     {
-        $iconPath = $request->attributes->get('iconPath') ?? $request->query->get('iconPath');
+        $iconPath = $this->iconPathResolver->resolve('hide');
 
         $content = $this->contentService->loadContent($contentId);
 
