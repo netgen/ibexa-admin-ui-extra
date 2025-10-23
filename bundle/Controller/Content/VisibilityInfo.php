@@ -30,9 +30,9 @@ class VisibilityInfo extends Controller
 
         $content = $this->contentService->loadContent($contentId);
 
-        $extraContent = [];
+        $extraLines = [];
         if ($content->getContentInfo()->isHidden() === true) {
-            $extraContent[] = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
+            $extraLines[] = $this->translator->trans('content.visibility.content_hidden', [], 'locationview');
         }
 
         try {
@@ -50,8 +50,8 @@ class VisibilityInfo extends Controller
                 }
             }
 
-            $explicitlyHiddenLocationsMessage = '';
-            $hiddenByAncestorLocationsMessage = '';
+            $explicitlyHiddenLocationsMessage = null;
+            $hiddenByAncestorLocationsMessage = null;
             if (count($locations) === 1) {
                 if ($explicitlyHiddenLocations !== 0) {
                     $explicitlyHiddenLocationsMessage = $this->translator->trans('content.visibility.location_hidden', [], 'locationview');
@@ -84,18 +84,14 @@ class VisibilityInfo extends Controller
                 }
             }
 
-            if ($explicitlyHiddenLocationsMessage !== '') {
-                $extraContent[] = $explicitlyHiddenLocationsMessage;
-            }
-
-            if ($hiddenByAncestorLocationsMessage !== '') {
-                $extraContent[] = $hiddenByAncestorLocationsMessage;
-            }
+            $extraLines[] = $explicitlyHiddenLocationsMessage;
+            $extraLines[] = $hiddenByAncestorLocationsMessage;
+            $extraLines = array_filter($extraLines);
         } catch (BadStateException $e) {
-            $extraContent[] = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
+            $extraLines[] = $this->translator->trans('content.visibility.cannot_fetch_locations', [], 'locationview');
         }
 
-        if ($extraContent === []) {
+        if ($extraLines === []) {
             return new Response('', Response::HTTP_NO_CONTENT);
         }
 
@@ -103,7 +99,7 @@ class VisibilityInfo extends Controller
             [
                 'type' => 'info',
                 'title' => $this->translator->trans('content.visibility.info', [], 'locationview'),
-                'extra_content' => implode('<br>', $extraContent),
+                'extra_content' => implode('<br>', $extraLines),
                 'icon_path' => $iconPath,
                 'class' => 'mt-4',
             ],
