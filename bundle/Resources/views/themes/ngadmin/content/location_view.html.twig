@@ -47,7 +47,7 @@
     {% endembed %}
 
     <div id="ng-visibility-alert"
-         data-url="{{ path('netgen.ibexa_admin_ui_extra.content.visibility.locations', { contentId: content.id, iconPath: ibexa_icon_path('hide') }) }}"
+         data-url="{{ path('netgen.ibexa_admin_ui_extra.content.visibility.locations', { contentId: content.id }) }}"
     >
         {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\VisibilityInfo', {
             'contentId': content.id,
