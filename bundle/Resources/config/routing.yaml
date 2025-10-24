@@ -9,3 +9,10 @@ netgen.ibexa_admin_ui_extra.queues.list:
     path: /queues/list
     methods: [ 'GET' ]
     controller: 'Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Queues'
+
+netgen.ibexa_admin_ui_extra.content.visibility.locations:
+    path: /content/{contentId}/locations/visibility_info
+    methods: ['GET']
+    controller: 'Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\VisibilityInfo'
+    requirements:
+        contentId: \d+

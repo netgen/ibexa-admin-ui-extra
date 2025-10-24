@@ -11,6 +11,23 @@ services:
             - controller.service_arguments
             - container.service_subscriber
 
+    Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\VisibilityInfo:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        arguments:
+            - '@ibexa.api.service.location'
+            - '@Symfony\Contracts\Translation\TranslatorInterface'
+            - '@ibexa.api.service.content'
+            - '@Ibexa\AdminUi\Resolver\IconPathResolver'
+        tags:
+            - controller.service_arguments
+            - container.service_subscriber
+
+    Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Content\LastModifiedInfo:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        tags:
+            - controller.service_arguments
+            - container.service_subscriber
+
     Netgen\Bundle\IbexaAdminUIExtraBundle\Controller\Queues:
         arguments:
             $transportLocator: '@messenger.receiver_locator'

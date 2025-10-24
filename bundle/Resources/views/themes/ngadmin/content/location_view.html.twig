@@ -20,33 +20,41 @@
             {% endif %}
         {% endblock %}
         {% block bottom %}
-            <span class="ibexa-icon-tag">
-                {% set url = path('ibexa.content_type.view', { 'contentTypeId': content_type.id, 'contentTypeGroupId': content_type.contentTypeGroups|first.id }) %}
-                <a href="{{ url }}">
-                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--{{ content_type.identifier }}">
-                        <use xlink:href="{{ ibexa_content_type_icon(content_type.identifier) }}"></use>
-                    </svg>
-                </a>
-                <a href="{{ url }}">{{ content_type.name }}</a>
-            </span>
-            {% set language_names = [] %}
-            {% for language in content.versionInfo.languages %}
-                {% set language_names = language_names|merge([language.name]) %}
-            {% endfor %}
-            {{ language_names|join(', ') }}
+            <div style="display: flex; justify-content: space-between;">
+                <div style="flex-basis: 50%; max-width: 50%;">
+                    <span class="ibexa-icon-tag">
+                        {% set url = path('ibexa.content_type.view', { 'contentTypeId': content_type.id, 'contentTypeGroupId': content_type.contentTypeGroups|first.id }) %}
+                        <a href="{{ url }}">
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--{{ content_type.identifier }}">
+                                <use xlink:href="{{ ibexa_content_type_icon(content_type.identifier) }}"></use>
+                            </svg>
+                        </a>
+                        <a href="{{ url }}">{{ content_type.name }}</a>
+                    </span>
+                    {% set language_names = [] %}
+                    {% for language in content.versionInfo.languages %}
+                        {% set language_names = language_names|merge([language.name]) %}
+                    {% endfor %}
+                    {{ language_names|join(', ') }}
+                </div>
+                <div style="flex-basis: 50%; display: flex; justify-content: flex-end">
+                    {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\LastModifiedInfo', {
+                        'content': content,
+                    })) }}
+                </div>
+            </div>
         {% endblock %}
     {% endembed %}
 
-    {% if location.hidden or location.invisible %}
-        <div class="pb-4">
-            {% include '@ibexadesign/ui/component/alert/alert.html.twig' with {
-                type: 'info',
-                title: 'content.hidden.message'|trans()|desc('This Content item or its Location is hidden.'),
-                icon_path: ibexa_icon_path('hide'),
-                class: 'mb-4',
-            } only %}
-        </div>
-    {% endif %}
+    <div id="ng-visibility-alert"
+         data-url="{{ path('netgen.ibexa_admin_ui_extra.content.visibility.locations', { contentId: content.id }) }}"
+    >
+        {{ render(controller('Netgen\\Bundle\\IbexaAdminUIExtraBundle\\Controller\\Content\\VisibilityInfo', {
+            'contentId': content.id,
+            'iconPath': ibexa_icon_path('hide'),
+        })) }}
+    </div>
+
     {{ ibexa_render_component_group(
         'location-view-content-alerts',
         {
