@@ -68,6 +68,9 @@
                         </span>
                     </div>
 
+                    {# This label is necessary because the Ibexa's JS script modifies it #}
+                    {# That's why this label is hidden and never shown #}
+                    {# vendor/ibexa/admin-ui/src/bundle/Resources/public/js/scripts/admin.location.visibility.js #}
                     <label class="ibexa-content-locations__visibility-toggler-label" style="display: none"></label>
 
                     {% if location.parentLocation is defined and location.parentLocation.invisible %}
